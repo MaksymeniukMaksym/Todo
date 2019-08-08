@@ -1,0 +1,18 @@
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 75%;
+}
+
+.full-width {
+  width: 100%;
+}
+button {
+  width: 20%;
+}
+
+.input-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
