@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title>
+         <div [ngClass]="{'striked': task.complete}" >{{task.title}}</div>
+     </mat-card-title>
+    <mat-card-subtitle>{{task.date | date:'shortDate'}}</mat-card-subtitle>
+    <mat-card-actions>
+         <button [disabled]="task.complete" (click)="isComplete(task)" mat-raised-button color="accent">Complete</button>
+         <button  (click)="DeleteTask(task)" mat-raised-button color="warn">Delete</button>
+    </mat-card-actions> 
+  
+ </mat-card>
+ <hr>
