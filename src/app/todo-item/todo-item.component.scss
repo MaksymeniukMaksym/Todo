@@ -1,0 +1,14 @@
+mat-card{
+    max-height: 35px;
+    min-width: 350px;
+    max-width: 350px;
+    display: flex;
+  
+button{
+  justify-content: right;
+}
+}
+
+.striked{
+  text-decoration:line-through;
+}
