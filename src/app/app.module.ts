@@ -4,6 +4,7 @@ import { MatButtonModule } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
+import { ClickOutsideModule } from 'ng-click-outside';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -19,6 +20,7 @@ import { TodoItemComponent } from "./todo-item/todo-item.component";
     TodoItemComponent
   ],
   imports: [
+    ClickOutsideModule,
     MatCardModule,
     MatInputModule,
     BrowserAnimationsModule,
