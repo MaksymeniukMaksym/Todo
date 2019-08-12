@@ -1,14 +1,37 @@
-mat-card{
-    max-height: 35px;
-    min-width: 350px;
-    max-width: 350px;
-    display: flex;
-  
-button{
-  justify-content: right;
-}
+mat-card {
+  margin: 5px;
+  max-height: 35px;
+  min-width: 350px;
+  max-width: 350px;
+  display: flex;
+
+  .completeButton {
+    left: 52%;
+  }
+  .deleteButton {
+    left: 75%;
+  }
+  .confirmButtonYes{
+    left: 58%;
+  }
+  .confirmButtonNo{
+    left: 75%;
+  }
+  button {
+    position: absolute;
+    height: 35px;
+  }
+  mat-card-title {
+    width: 170px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  mat-card-subtitle {
+    position: absolute;
+    bottom: -15%;
+  }
 }
 
-.striked{
-  text-decoration:line-through;
+.striked {
+  text-decoration: line-through;
 }

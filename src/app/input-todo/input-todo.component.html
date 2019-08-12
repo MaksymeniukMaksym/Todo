@@ -1,8 +1,8 @@
 <div class="input-field">
     <form>
         <mat-form-field class="full-width">
-            <input (change)="validateInput($event)" #TaskHeader  matInput placeholder="Write you task"/>
+            <input onfocus="this.value=''" (change)="validateInput($event)" #TaskHeader  matInput placeholder="Write you task"/>
         </mat-form-field>   
     </form>
-    <button [disabled]="!isInputValid" mat-raised-button (click)="getHeader(TaskHeader.value)" >Button</button>
+    <button [disabled]="!isInputValid" mat-raised-button (click)="getHeader(TaskHeader.value)" >Add</button>
 </div>

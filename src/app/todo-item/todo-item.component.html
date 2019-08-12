@@ -1,12 +1,28 @@
-<mat-card>
-    <mat-card-title>
-         <div [ngClass]="{'striked': task.complete}" >{{task.title}}</div>
-     </mat-card-title>
-    <mat-card-subtitle>{{task.date | date:'shortDate'}}</mat-card-subtitle>
-    <mat-card-actions>
-         <button [disabled]="task.complete" (click)="isComplete(task)" mat-raised-button color="accent">Complete</button>
-         <button  (click)="DeleteTask(task)" mat-raised-button color="warn">Delete</button>
-    </mat-card-actions> 
-  
- </mat-card>
- <hr>
+
+<mat-card (clickOutside)="onclickOutside()" >
+     <div *ngIf='!isDeleteMode; then normalMode else deleteMode'></div>
+     <ng-template #normalMode>
+          <mat-card-title>
+               <div [ngClass]="{'striked': task.complete}">{{task.title}}</div>
+          </mat-card-title>
+          <mat-card-subtitle>{{task.date | date:'shortDate'}}</mat-card-subtitle>
+          <mat-card-actions>
+               <button class="completeButton" [disabled]="task.complete" (click)="toggleComplete(task)"
+                    mat-raised-button color="accent">Complete</button>
+               <button class="deleteButton" (click)="toggleDeleteMode()" mat-raised-button color="warn">Delete</button>
+          </mat-card-actions>
+     </ng-template>
+
+     <ng-template #deleteMode>
+          <div>
+          <mat-card-title>
+               <div>Are you sure?</div>
+          </mat-card-title>
+          <mat-card-actions>
+               <button class="confirmButtonYes" (click)="DeleteTask(task)" mat-raised-button color="warn">Yes</button>
+               <button class="confirmButtonNo" (click)="toggleDeleteMode()" mat-raised-button color="primary">No</button>
+          </mat-card-actions>
+          </div>
+     </ng-template>
+
+</mat-card>
