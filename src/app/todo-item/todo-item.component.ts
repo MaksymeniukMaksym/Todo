@@ -1,27 +1,32 @@
-import { TodoService } from '../todo.service';
-import { Component, OnInit, Input } from '@angular/core';
-import {Todo} from "../todo";
+import { TodoService } from "../todo.service";
+import { Component, OnInit, Input } from "@angular/core";
+import { Todo } from "../todo";
 
 @Component({
-  selector: 'app-todo-item',
-  templateUrl: './todo-item.component.html',
-  styleUrls: ['./todo-item.component.scss']
+  selector: "app-todo-item",
+  templateUrl: "./todo-item.component.html",
+  styleUrls: ["./todo-item.component.scss"]
 })
 export class TodoItemComponent implements OnInit {
-  @Input() task: Todo; 
+  @Input() task: Todo;
+  isDeleteMode = false;
 
-  constructor( private todoService: TodoService ) { }
+  constructor(private todoService: TodoService) {}
 
-  isComplete(value){
-    console.log(value);
-    value.complete = true;
+  toggleComplete(todo: Todo) {
+    todo.complete = true;
+    this.todoService.update(todo.id, todo);
+  }
+  toggleDeleteMode() {
+    this.isDeleteMode = !this.isDeleteMode;
+    }
+    onclickOutside(){
+    this.isDeleteMode = !this.isDeleteMode;  
   }
 
-  DeleteTask(value){
+  DeleteTask(value) {
     this.todoService.delete(value);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
