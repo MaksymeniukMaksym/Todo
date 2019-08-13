@@ -11,24 +11,34 @@ mat-card {
   .deleteButton {
     left: 75%;
   }
-  .confirmButtonYes{
+  .confirmButtonYes {
     left: 58%;
   }
-  .confirmButtonNo{
+  .confirmButtonNo {
     left: 75%;
   }
   button {
     position: absolute;
     height: 35px;
   }
+  mat-card-footer {
+    position: absolute;
+    height: 100px;
+    right: 53%;
+  }
   mat-card-title {
     width: 170px;
-    overflow:hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
   mat-card-subtitle {
     position: absolute;
     bottom: -15%;
+  }
+  .deadLineTime{
+    position: absolute;
+    top:-30%;
+    right: 5%;
   }
 }
 

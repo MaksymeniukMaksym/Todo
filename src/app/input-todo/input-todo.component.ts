@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Todo } from "../todo";
 import { TodoService } from "../todo.service";
 
 @Component({
@@ -10,14 +9,26 @@ import { TodoService } from "../todo.service";
 export class InputTodoComponent implements OnInit {
   isInputValid = false;
 
+  description = "";
+
   constructor(private todoService: TodoService) {}
 
   validateInput(event) {
-    this.isInputValid = event.target.value !== '' ? true : false; 
+    this.isInputValid = event.target.value !== "" ? true : false;
   }
 
-  getHeader(value) {
-    this.todoService.create(value);
+  createTodoOnEnter(event) {
+    if (event.which === 13) {
+      this.createTodo();
+      this.description = "";
+    }
+  }
+
+  createTodo() {
+    if (this.description.trim() !== "") {
+      this.todoService.create(this.description);
+      this.description = "";
+    }
   }
 
   ngOnInit() {}

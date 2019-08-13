@@ -1,6 +1,10 @@
+import { FormControl } from '@angular/forms';
 export class Todo {
-    id: number;
+    id: string;
     title: string;
-    date:Date;
+    createDate:Date;
+    deadLine: FormControl;
+    endDate:Date;
     complete: boolean = false;
+    
 }

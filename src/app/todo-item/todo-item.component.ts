@@ -1,5 +1,12 @@
 import { TodoService } from "../todo.service";
-import { Component, OnInit, Input } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import {
+  Component,
+  OnInit,
+  Input,
+  HostListener,
+  ElementRef
+} from "@angular/core";
 import { Todo } from "../todo";
 
 @Component({
@@ -9,9 +16,28 @@ import { Todo } from "../todo";
 })
 export class TodoItemComponent implements OnInit {
   @Input() task: Todo;
-  isDeleteMode = false;
 
-  constructor(private todoService: TodoService) {}
+  ngOnInit() {}
+  private wasInside = false;
+  isChangeMode = false;
+  isDeleteMode = false;
+  description = "";
+  serializedDate = new FormControl(new Date());
+  constructor(private todoService: TodoService, private eRef: ElementRef) {}
+
+  @HostListener("click")
+  clickInside() {
+    this.wasInside = true;
+  }
+
+  @HostListener("document:click")
+  clickout() {
+    if (!this.wasInside) {
+      // this.isChangeMode = false;
+      this.isDeleteMode = false;
+    }
+    this.wasInside = false;
+  }
 
   toggleComplete(todo: Todo) {
     todo.complete = true;
@@ -19,14 +45,13 @@ export class TodoItemComponent implements OnInit {
   }
   toggleDeleteMode() {
     this.isDeleteMode = !this.isDeleteMode;
-    }
-    onclickOutside(){
-    this.isDeleteMode = !this.isDeleteMode;  
   }
-
-  DeleteTask(value) {
+  
+  saveChages(todo: Todo) {
+    todo.deadLine = this.serializedDate.value;
+    this.todoService.update(todo.id, todo);
+  }
+     DeleteTask(value) {
     this.todoService.delete(value);
   }
-
-  ngOnInit() {}
 }

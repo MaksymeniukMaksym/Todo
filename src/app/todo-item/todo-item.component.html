@@ -1,28 +1,40 @@
+<mat-card>
 
-<mat-card (clickOutside)="onclickOutside()" >
-     <div *ngIf='!isDeleteMode; then normalMode else deleteMode'></div>
-     <ng-template #normalMode>
-          <mat-card-title>
-               <div [ngClass]="{'striked': task.complete}">{{task.title}}</div>
-          </mat-card-title>
-          <mat-card-subtitle>{{task.date | date:'shortDate'}}</mat-card-subtitle>
-          <mat-card-actions>
-               <button class="completeButton" [disabled]="task.complete" (click)="toggleComplete(task)"
-                    mat-raised-button color="accent">Complete</button>
-               <button class="deleteButton" (click)="toggleDeleteMode()" mat-raised-button color="warn">Delete</button>
-          </mat-card-actions>
-     </ng-template>
+          <div *ngIf='!isDeleteMode; then normalMode else deleteMode'></div>
 
-     <ng-template #deleteMode>
-          <div>
-          <mat-card-title>
-               <div>Are you sure?</div>
-          </mat-card-title>
-          <mat-card-actions>
-               <button class="confirmButtonYes" (click)="DeleteTask(task)" mat-raised-button color="warn">Yes</button>
-               <button class="confirmButtonNo" (click)="toggleDeleteMode()" mat-raised-button color="primary">No</button>
-          </mat-card-actions>
-          </div>
-     </ng-template>
+          <ng-template #normalMode>
+               <mat-card-title>
+                    <div [ngClass]="{'striked': task.complete}"> {{task.title}}</div>
+               </mat-card-title>
+               <div class="deadLineTime">
+                    <mat-form-field>
+                         <input  matInput [matDatepicker]="deadline" [formControl]="serializedDate" (ngModelChange)="saveChages(task)" [value]="task.deadLine">
+                         <mat-datepicker-toggle [for]="deadline" matSuffix></mat-datepicker-toggle>
+                         <mat-datepicker #deadline></mat-datepicker>
+                    </mat-form-field>
+               </div>
+               <mat-card-subtitle>{{task.createDate | date:'shortDate'}}</mat-card-subtitle>
+               <mat-card-actions>
+                    <button class="completeButton" [disabled]="task.complete" (click)="toggleComplete(task)"
+                         mat-raised-button color="accent">Complete</button>
+                    <button class="deleteButton" (click)="toggleDeleteMode()" mat-raised-button
+                         color="warn">Delete</button>
+               </mat-card-actions>
+          </ng-template>
+
+          <ng-template #deleteMode>
+
+               <mat-card-title>
+                    <div>Are you sure?</div>
+               </mat-card-title>
+               <mat-card-actions>
+                    <button class="confirmButtonYes" (click)="DeleteTask(task)" mat-raised-button
+                         color="warn">Yes</button>
+                    <button class="confirmButtonNo" (click)="toggleDeleteMode()" mat-raised-button
+                         color="primary">No</button>
+               </mat-card-actions>
+          </ng-template>
+   
+
 
 </mat-card>

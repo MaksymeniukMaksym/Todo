@@ -1,8 +1,7 @@
 <div class="input-field">
-    <form>
-        <mat-form-field class="full-width">
-            <input onfocus="this.value=''" (change)="validateInput($event)" #TaskHeader  matInput placeholder="Write you task"/>
-        </mat-form-field>   
-    </form>
-    <button [disabled]="!isInputValid" mat-raised-button (click)="getHeader(TaskHeader.value)" >Add</button>
+    <mat-form-field class="full-width">
+        <input onfocus="this.value= '' " [(ngModel)]="description" (keydown)="createTodoOnEnter($event)" type="text"
+            (change)="validateInput($event)" matInput placeholder="Write you task" />
+    </mat-form-field>
+    <button [disabled]="!isInputValid" mat-raised-button (click)="createTodo()">Add</button>
 </div>
