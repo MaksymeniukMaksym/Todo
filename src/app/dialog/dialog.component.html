@@ -1,0 +1,10 @@
+<mat-dialog-content>Change task name</mat-dialog-content>
+<form>
+    <mat-form-field>
+        <input #TaskTitle class="form-fild" matInput placeholder="New Name"
+       [value]="data.title"  type="text">
+        <mat-dialog-actions>
+            <button mat-button (click)=changeName(TaskTitle)>Save</button>
+        </mat-dialog-actions>
+    </mat-form-field>
+</form>
