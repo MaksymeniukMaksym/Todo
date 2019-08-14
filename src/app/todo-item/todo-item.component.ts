@@ -1,3 +1,4 @@
+import { TimeService } from "./../time.service";
 import { TodoService } from "../todo.service";
 import { FormControl } from "@angular/forms";
 import {
@@ -5,9 +6,21 @@ import {
   OnInit,
   Input,
   HostListener,
-  ElementRef
+  Directive
 } from "@angular/core";
 import { Todo } from "../todo";
+
+@Directive({
+  selector: "[click-stop-propagation]"
+})
+export class ClickStopPropagation {
+  constructor(public todoItemComponent: TodoItemComponent) {}
+ 
+  @HostListener("click", ["$event"])
+  public onClick(event: any): void {
+    event.stopPropagation();
+  }
+}
 
 @Component({
   selector: "app-todo-item",
@@ -16,24 +29,27 @@ import { Todo } from "../todo";
 })
 export class TodoItemComponent implements OnInit {
   @Input() task: Todo;
-
   ngOnInit() {}
-  private wasInside = false;
-  isChangeMode = false;
+  public wasInside = false;
   isDeleteMode = false;
   description = "";
   serializedDate = new FormControl(new Date());
-  constructor(private todoService: TodoService, private eRef: ElementRef) {}
+  isOutDated= false;
+
+  constructor(
+    private todoService: TodoService,
+    public timeService: TimeService
+  ) {}
 
   @HostListener("click")
   clickInside() {
+    this.openDialogService();
     this.wasInside = true;
   }
 
   @HostListener("document:click")
   clickout() {
     if (!this.wasInside) {
-      // this.isChangeMode = false;
       this.isDeleteMode = false;
     }
     this.wasInside = false;
@@ -46,12 +62,20 @@ export class TodoItemComponent implements OnInit {
   toggleDeleteMode() {
     this.isDeleteMode = !this.isDeleteMode;
   }
-  
+
+  CheckDate(todo:Todo){
+    this.isOutDated = this.timeService.CheckOutDate(todo);
+  }
+
+  openDialogService() {
+    this.todoService.openDialog(this.task);
+  }
+
   saveChages(todo: Todo) {
     todo.deadLine = this.serializedDate.value;
     this.todoService.update(todo.id, todo);
   }
-     DeleteTask(value) {
+  DeleteTask(value) {
     this.todoService.delete(value);
   }
 }
