@@ -23,8 +23,9 @@ mat-card {
   }
   mat-card-footer {
     position: absolute;
-    height: 100px;
+    height: 90px;
     right: 53%;
+    bottom: 10px;
   }
   mat-card-title {
     width: 170px;
@@ -37,9 +38,10 @@ mat-card {
   }
   .deadLineTime{
     position: absolute;
-    top:-30%;
-    right: 5%;
+    top:-35%;
+    right: 4%;
   }
+
 }
 
 .striked {
