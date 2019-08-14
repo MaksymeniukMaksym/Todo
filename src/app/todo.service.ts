@@ -1,8 +1,10 @@
+import { DialogComponent } from './dialog/dialog.component';
 import { StorageService } from "./storage.service";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Todo } from "./todo";
 import { UUID } from "angular2-uuid";
+import {MatDialog} from "@angular/material"
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +12,12 @@ import { UUID } from "angular2-uuid";
 export class TodoService {
   private _source = new BehaviorSubject<Todo[]>([]);
   public source = this._source.asObservable();
-  constructor(private storageService: StorageService) {
+
+  constructor(
+    private storageService: StorageService,
+    public dialog: MatDialog,
+  
+    ) {
     this._source.next(this.getTodos());
   }
 
@@ -43,9 +50,18 @@ export class TodoService {
     const newTodos = todos.filter(todo => todo.id !== id);
     this.updateTodos(newTodos);
   }
+  public openDialog(todo:Todo){
+    this.dialog.open(DialogComponent,{data:todo});
+    
+  }
 
-  public getTodos() {
-    const todos = this.storageService.getData("todos");
-    return todos || [];
+  public getTodos(): Todo[] {
+    const todos: any[] = this.storageService.getData("todos");
+    return todos.map<Todo>(todo => {
+      todo.createDate = new Date(todo.createDate);
+      todo.deadLine = todo.deadLine && new Date(todo.deadLine);
+      todo.endDate = todo.endDate && new Date(todo.endDate);
+      return todo;
+    }) || [];
   }
 }
