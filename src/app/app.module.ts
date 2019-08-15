@@ -20,6 +20,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatBadgeModule } from "@angular/material/badge";
 import { DialogComponent } from "./dialog/dialog.component";
+import { TimeLeftPipe } from './pipes/time-left.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DialogComponent } from "./dialog/dialog.component";
     InputTodoComponent,
     TodoListComponent,
     TodoItemComponent,
-    DialogComponent
+    DialogComponent,
+    TimeLeftPipe
   ],
   entryComponents: [DialogComponent],
   imports: [
