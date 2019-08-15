@@ -11,7 +11,10 @@
                  <mat-datepicker #deadline></mat-datepicker>
             </mat-form-field>
        </div>
+
+               <ngx-timepicker-field  [formControl]="serializedTime" [format]="24" [defaultTime]="'00:00'"></ngx-timepicker-field>
+
        <mat-dialog-actions>
-            <button mat-raised-button  color="primary" (click)=saveChages(TaskTitle,data)>Save</button>
+            <button mat-raised-button  color="primary" (click)=saveChages(TaskTitle)>Save</button>
         </mat-dialog-actions>
 </form>
