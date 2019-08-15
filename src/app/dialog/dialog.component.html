@@ -3,8 +3,15 @@
     <mat-form-field>
         <input #TaskTitle class="form-fild" matInput placeholder="New Name"
        [value]="data.title"  type="text">
-        <mat-dialog-actions>
-            <button mat-button (click)=changeName(TaskTitle)>Save</button>
-        </mat-dialog-actions>
     </mat-form-field>
+    <div class="deadLineTime">
+            <mat-form-field >
+                 <input class="deadLineFild" matInput [matDatepicker]="deadline" [formControl]="serializedDate">
+                 <mat-datepicker-toggle [for]="deadline" matSuffix></mat-datepicker-toggle>
+                 <mat-datepicker #deadline></mat-datepicker>
+            </mat-form-field>
+       </div>
+       <mat-dialog-actions>
+            <button mat-raised-button  color="primary" (click)=saveChages(TaskTitle,data)>Save</button>
+        </mat-dialog-actions>
 </form>
