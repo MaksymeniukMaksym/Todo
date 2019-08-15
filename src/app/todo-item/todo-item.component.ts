@@ -1,6 +1,5 @@
-import { TimeService } from "./../time.service";
+
 import { TodoService } from "../todo.service";
-import { FormControl } from "@angular/forms";
 import {
   Component,
   OnInit,
@@ -33,13 +32,13 @@ export class TodoItemComponent implements OnInit {
   public wasInside = false;
   isDeleteMode = false;
   description = "";
-  serializedDate = new FormControl(new Date());
-  isOutDated= false;
+ 
+  
 
   constructor(
     private todoService: TodoService,
-    public timeService: TimeService
   ) {}
+
 
   @HostListener("click")
   clickInside() {
@@ -63,18 +62,11 @@ export class TodoItemComponent implements OnInit {
     this.isDeleteMode = !this.isDeleteMode;
   }
 
-  CheckDate(todo:Todo){
-    this.isOutDated = this.timeService.CheckOutDate(todo);
-  }
-
   openDialogService() {
     this.todoService.openDialog(this.task);
   }
 
-  saveChages(todo: Todo) {
-    todo.deadLine = this.serializedDate.value;
-    this.todoService.update(todo.id, todo);
-  }
+  
   DeleteTask(value) {
     this.todoService.delete(value);
   }

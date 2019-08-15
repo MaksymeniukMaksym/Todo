@@ -5,25 +5,15 @@
           <mat-card-title>
                <div [ngClass]="{'striked': task.complete}"> {{task.title}}</div>
           </mat-card-title>
-          <div class="deadLineTime" *ngIf="isOutDated; then OutDated else Actual" >
-               <mat-form-field click-stop-propagation>
-                    <div ></div>
-                    <ng-template #OutDated></ng-template>
-                    <ng-template #Actual></ng-template>
-                    
-                    <input class="deadLineFild" matInput [matDatepicker]="deadline" [formControl]="serializedDate"
-                         (ngModelChange)="saveChages(task)" [value]="task.deadLine">
-                    <mat-datepicker-toggle [for]="deadline" matSuffix></mat-datepicker-toggle>
-                    <mat-datepicker #deadline></mat-datepicker>
-               </mat-form-field>
-          </div>
+
+          <mat-card-subtitle class="deadLineTime">{{task | timeLeft}}
+          </mat-card-subtitle>
           <mat-card-subtitle click-stop-propagation>{{task.createDate | date:'shortDate'}}</mat-card-subtitle>
           <mat-card-actions click-stop-propagation>
                <button class="completeButton" [disabled]="task.complete" (click)="toggleComplete(task)"
                     mat-raised-button color="accent">Complete</button>
                <button class="deleteButton" (click)="toggleDeleteMode()" mat-raised-button click-stop-propagation
                     color="warn">Delete</button>
-               <button (click)="CheckDate(task)"></button>
 
           </mat-card-actions>
      </ng-template>
