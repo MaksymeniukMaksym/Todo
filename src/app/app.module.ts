@@ -8,7 +8,8 @@ import { InputTodoComponent } from "./input-todo/input-todo.component";
 import { TodoListComponent } from "./todo-list/todo-list.component";
 import { TodoItemComponent, ClickStopPropagation } from "./todo-item/todo-item.component";
 import { NgModule } from "@angular/core";
-
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MomentModule } from 'ngx-moment';
 import {
   MatDialogModule,
   MatButtonModule,
@@ -34,6 +35,8 @@ import { TimeLeftPipe } from './pipes/time-left.pipe';
   ],
   entryComponents: [DialogComponent],
   imports: [
+    MomentModule,
+    NgxMaterialTimepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
     MatBadgeModule,
