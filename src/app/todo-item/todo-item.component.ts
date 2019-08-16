@@ -1,4 +1,4 @@
-
+import { TimeTrackService } from './../time-track.service';
 import { TodoService } from "../todo.service";
 import {
   Component,
@@ -9,11 +9,14 @@ import {
 } from "@angular/core";
 import { Todo } from "../todo";
 
+
 @Directive({
   selector: "[click-stop-propagation]"
 })
 export class ClickStopPropagation {
-  constructor(public todoItemComponent: TodoItemComponent) {}
+  constructor(
+    public todoItemComponent: TodoItemComponent,
+    ) {}
  
   @HostListener("click", ["$event"])
   public onClick(event: any): void {
@@ -37,6 +40,7 @@ export class TodoItemComponent implements OnInit {
 
   constructor(
     private todoService: TodoService,
+    public timeTrackService :TimeTrackService,
   ) {}
 
 
@@ -56,6 +60,7 @@ export class TodoItemComponent implements OnInit {
 
   toggleComplete(todo: Todo) {
     todo.complete = true;
+    todo.endDate = new Date()
     this.todoService.update(todo.id, todo);
   }
   toggleDeleteMode() {
