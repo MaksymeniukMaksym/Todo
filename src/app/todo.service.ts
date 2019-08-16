@@ -1,11 +1,9 @@
-import { DialogComponent } from './dialog/dialog.component';
-import { StorageService } from "./storage.service";
+import { DialogComponent } from "./dialog/dialog.component";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { Todo } from "./todo";
-import { UUID } from "angular2-uuid";
-import {MatDialog} from "@angular/material"
-
+import { MatDialog } from "@angular/material";
+import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: "root"
 })
@@ -13,55 +11,76 @@ export class TodoService {
   private _source = new BehaviorSubject<Todo[]>([]);
   public source = this._source.asObservable();
 
-  constructor(
-    private storageService: StorageService,
-    public dialog: MatDialog,
-  
-    ) {
+  constructor(public dialog: MatDialog, private http: HttpClient) {
     this._source.next(this.getTodos());
   }
 
   create(value: string) {
-    const todo = new Todo();
-    todo.title = value;
-    todo.createDate = new Date();
-    todo.id = UUID.UUID();
-    todo.complete = false;
-    const todos = this._source.getValue();
-    todos.push(todo);
-    this.updateTodos(todos);
-  }
+    this.http
+      .post<any>("api/todos", {
+        description: value
+      })
+      .subscribe(({ data }) => {
+        const todo = new Todo();
+        todo.id = data.id;
+        todo.title = data.description;
+        todo.complete = data.completed;
+        todo.deadLine = data.dueDate;
+        todo.endDate = data.endDate ;
+        todo.createDate = data.createdAt;
 
-  private updateTodos(todos: Array<Todo>) {
-    this.storageService.saveData("todos", todos);
-
-    this._source.next(todos);
+        const todos = this._source.getValue();
+        todos.push(todo);
+        this._source.next(todos);
+        console.log(todos);
+      });
   }
 
   update(id, todo) {
-    const todos = this._source.getValue();
-    const index = todos.findIndex(todo => todo.id === id);
-    todos[index] = todo;
-    this.updateTodos(todos);
+    this.http
+      .put(`api/todos/${id}`, {
+        description: todo.title,
+        completed: todo.complete,
+        dueDate: todo.deadLine,
+        endDate: todo.endDate
+      })
+      .subscribe(() => {
+        const todos = this._source.getValue();
+        const index = todos.findIndex(todo => todo.id === id);
+        todos[index] = todo;
+        this._source.next(todos);
+        console.log(todos);
+      });
   }
 
   delete({ id }) {
-    const todos = this._source.getValue();
-    const newTodos = todos.filter(todo => todo.id !== id);
-    this.updateTodos(newTodos);
+    this.http.delete(`api/todos/${id}`).subscribe(() => {
+      const todos = this._source.getValue();
+      const indexForRemove = todos.findIndex(todo => todo.id == id);
+      todos.splice(indexForRemove, 1);
+      this._source.next(todos);
+      console.log(todos);
+    });
   }
-  public openDialog(todo:Todo){
-    this.dialog.open(DialogComponent,{data:todo});
-    
+  public openDialog(todo: Todo) {
+    this.dialog.open(DialogComponent, { data: todo });
   }
 
   public getTodos(): Todo[] {
-    const todos: any[] = this.storageService.getData("todos");
-    return todos.map<Todo>(todo => {
-      todo.createDate = new Date(todo.createDate);
-      todo.deadLine = todo.deadLine && new Date(todo.deadLine);
-      todo.endDate = todo.endDate && new Date(todo.endDate);
-      return todo;
-    }) || [];
+    this.http.get<any>("/api/todos").subscribe(({ data }) => {
+      const todos = data.map(obj => {
+        const todo = new Todo();
+        todo.id = obj.id;
+        todo.title = obj.description;
+        todo.complete = obj.completed;
+        todo.deadLine = obj.dueDate;
+        todo.endDate = obj.endDate;
+        todo.createDate = obj.createdAt;
+        return todo;
+      });
+      this._source.next(todos);
+      console.log(todos);
+    });
+    return [];
   }
 }
