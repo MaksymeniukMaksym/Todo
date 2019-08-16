@@ -1,3 +1,4 @@
+import { TokenInterceptorService } from './token-interceptor.service';
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -9,7 +10,6 @@ import { TodoListComponent } from "./todo-list/todo-list.component";
 import { TodoItemComponent, ClickStopPropagation } from "./todo-item/todo-item.component";
 import { NgModule } from "@angular/core";
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { MomentModule } from 'ngx-moment';
 import {
   MatDialogModule,
   MatButtonModule,
@@ -22,6 +22,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatBadgeModule } from "@angular/material/badge";
 import { DialogComponent } from "./dialog/dialog.component";
 import { TimeLeftPipe } from './pipes/time-left.pipe';
+import { HttpClientModule , HTTP_INTERCEPTORS }   from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TimeLeftPipe } from './pipes/time-left.pipe';
   ],
   entryComponents: [DialogComponent],
   imports: [
-    MomentModule,
+    TokenInterceptorService,
+    HttpClientModule,
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
@@ -53,7 +55,11 @@ import { TimeLeftPipe } from './pipes/time-left.pipe';
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+    { provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
