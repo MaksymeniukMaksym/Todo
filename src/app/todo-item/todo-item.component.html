@@ -24,7 +24,7 @@
                <div click-stop-propagation>Are you sure?</div>
           </mat-card-title>
           <mat-card-actions>
-               <button class="confirmButtonYes" (click)="DeleteTask(task)" mat-raised-button color="warn">Yes</button>
+               <button click-stop-propagation class="confirmButtonYes" (click)="DeleteTask(task)" mat-raised-button color="warn">Yes</button>
                <button class="confirmButtonNo" (click)="toggleDeleteMode()" mat-raised-button click-stop-propagation
                     color="primary">No</button>
           </mat-card-actions>
