@@ -2,6 +2,9 @@
     display: none; 
 }
 .listArea{
+    position: absolute;
     overflow: auto;
-    height: 430px;
+    bottom: -425px;
+    left:-15px;
+    height: 380px;
 }
