@@ -1,7 +1,7 @@
-import { DialogComponent } from "./dialog/dialog.component";
+import { DialogComponent } from "../dialog/dialog.component";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Todo } from "./todo";
+import { Todo } from "../todo";
 import { MatDialog } from "@angular/material";
 import { HttpClient } from "@angular/common/http";
 @Injectable({
@@ -14,10 +14,12 @@ export class TodoService {
   constructor(public dialog: MatDialog, private http: HttpClient) {
     this._source.next(this.getTodos());
   }
-
+  clear(){
+    this._source.next([]);
+  }
   create(value: string) {
     this.http
-      .post<any>("api/todos", {
+      .post<any>("api/api/todos", {
         description: value
       })
       .subscribe(({ data }) => {
@@ -38,7 +40,7 @@ export class TodoService {
 
   update(id, todo) {
     this.http
-      .put(`api/todos/${id}`, {
+      .put(`api/api/todos/${id}`, {
         description: todo.title,
         completed: todo.complete,
         dueDate: todo.deadLine,
@@ -54,7 +56,7 @@ export class TodoService {
   }
 
   delete({ id }) {
-    this.http.delete(`api/todos/${id}`).subscribe(() => {
+    this.http.delete(`api/api/todos/${id}`).subscribe(() => {
       const todos = this._source.getValue();
       const indexForRemove = todos.findIndex(todo => todo.id == id);
       todos.splice(indexForRemove, 1);
@@ -67,7 +69,7 @@ export class TodoService {
   }
 
   public getTodos(): Todo[] {
-    this.http.get<any>("/api/todos").subscribe(({ data }) => {
+    this.http.get<any>("api/api/todos").subscribe(({ data }) => {
       const todos = data.map(obj => {
         const todo = new Todo();
         todo.id = obj.id;
