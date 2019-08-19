@@ -1,5 +1,5 @@
-import { TimeTrackService } from './../time-track.service';
-import { TodoService } from "../todo.service";
+import { TimeTrackService } from '../services/time-track.service';
+import { TodoService } from "../services/todo.service";
 import {
   Component,
   OnInit,
