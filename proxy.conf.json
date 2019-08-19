@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://todo-training.herokuapp.com",
+      "target": "https://auth-todo-training.herokuapp.com",
       "secure": false,
       "pathRewrite": {
         "^/api": ""
