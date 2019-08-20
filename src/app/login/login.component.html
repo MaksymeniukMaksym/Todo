@@ -1,4 +1,7 @@
-<div>
+<div class="title">
+  <h1>Sign in</h1>
+</div>
+<div class="form">
      <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
         <input matInput placeholder="Enter your email" formControlName="email" required>
@@ -7,6 +10,10 @@
       <mat-form-field appearance="outline">
         <input type="password" matInput placeholder="Enter your password" formControlName="password" required>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <div class="button-position">
+       <button mat-raised-button color="primary" type="submit">Sign in</button>
+      <h3>or</h3>
+      <button  mat-stroked-button routerLink="/register" >Sign up</button>
+    </div>
     </form> 
 </div>
