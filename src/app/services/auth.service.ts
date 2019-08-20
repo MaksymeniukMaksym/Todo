@@ -7,15 +7,16 @@ import { Injectable } from "@angular/core";
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  registerUser(user) {
+  registerUser(firstName, lastName, email, password) {
     return this.http.post<any>("api/auth/register", {
-      email: user.email,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
     });
+    
   }
-  loginUser(email,password) {
+  loginUser(email, password) {
     localStorage.clear();
     return this.http.post<any>("api/auth/login", {
       email: email,
