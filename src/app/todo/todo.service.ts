@@ -1,9 +1,10 @@
-import { DialogComponent } from "../dialog/dialog.component";
+import { DialogComponent } from "./dialog/dialog.component";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Todo } from "../todo";
+import { Todo } from "./todo";
 import { MatDialog } from "@angular/material";
 import { HttpClient } from "@angular/common/http";
+
 @Injectable({
   providedIn: "root"
 })

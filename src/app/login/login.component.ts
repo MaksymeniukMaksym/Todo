@@ -24,10 +24,7 @@ export class LoginComponent implements OnInit {
     const email = this.form.get("email").value;
     const password = this.form.get("password").value;
 
-    this.auth.loginUser(email, password).subscribe(({ token }) => {
-      localStorage.setItem("token",token);
-      this.router.navigateByUrl("/todo")
-    })
+    this.auth.loginUser(email, password).subscribe() 
   }
 
   getErrorMessage() {

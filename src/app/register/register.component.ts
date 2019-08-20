@@ -27,10 +27,7 @@ export class RegisterComponent implements OnInit {
 
     this.auth
       .registerUser(firstName, lastName, email, password)
-      .subscribe(() => {
-console.log("success")
-        this.router.navigateByUrl("/login");
-      });
+      .subscribe();
   }
 
   getErrorMessage() {

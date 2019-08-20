@@ -1,4 +1,4 @@
-import { Todo } from "./../todo";
+import { Todo } from "./todo";
 import { Pipe, PipeTransform } from "@angular/core";
 import * as moment from 'moment';
 
