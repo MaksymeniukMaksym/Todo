@@ -11,8 +11,9 @@ import {
   TodoItemComponent,
   ClickStopPropagation
 } from "./todo-item/todo-item.component";
-// import { DialogComponent } from "src/app/todo/dialog/dialog.component";
 import { TimeLeftPipe } from "./time-left.pipe";
+import { EffectivelyPipe } from '../todo/effectively.pipe';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -20,23 +21,23 @@ const routes: Routes = [{ path: '', component: TodoComponent }];
 
 @NgModule({
   declarations: [
-    // DialogComponent,
+    UserComponent,
     MenuComponent,
     TodoComponent,
     InputTodoComponent,
     TodoListComponent,
     TodoItemComponent,
     ClickStopPropagation,
-    TimeLeftPipe
+    TimeLeftPipe,
+    EffectivelyPipe,
   ],
-  // entryComponents: [DialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
   ],
   exports: [
-    // DialogComponent,
+    UserComponent,
     TodoComponent,
   ]
 })

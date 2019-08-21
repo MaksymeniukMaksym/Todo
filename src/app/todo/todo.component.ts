@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class TodoComponent implements OnInit {
 
   constructor() { }
+  isUserCabinet= false;
 
+  toggleMode(){
+    this.isUserCabinet = !this.isUserCabinet;
+  }
   ngOnInit() {
   }
 

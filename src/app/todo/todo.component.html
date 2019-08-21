@@ -1,10 +1,16 @@
-<div class="menu-position">
-    <app-menu></app-menu>
-  </div>
+<div class="menu-position" (click)="toggleMode()">
+  <app-menu></app-menu>
+</div>
+<div *ngIf='!isUserCabinet; then todoMode else userCabinetMode'></div>
+
+<ng-template #todoMode>
   <div class="list-position">
     <app-todo-list></app-todo-list>
   </div>
-  
   <div class="input-position">
     <app-input-todo></app-input-todo>
   </div>
+</ng-template>
+<ng-template #userCabinetMode>
+  <app-user></app-user>
+</ng-template>

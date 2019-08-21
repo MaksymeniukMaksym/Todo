@@ -1,5 +1,7 @@
+import { TodoListComponent } from './../todo-list/todo-list.component';
 import { TimeTrackService } from '../time-track.service';
 import { TodoService } from "../todo.service";
+
 import {
   Component,
   OnInit,
@@ -35,12 +37,14 @@ export class TodoItemComponent implements OnInit {
   public wasInside = false;
   isDeleteMode = false;
   description = "";
- 
   
+  
+
 
   constructor(
     private todoService: TodoService,
     public timeTrackService :TimeTrackService,
+    public todoList:TodoListComponent,
   ) {}
 
 
@@ -60,8 +64,8 @@ export class TodoItemComponent implements OnInit {
 
   toggleComplete(todo: Todo) {
     todo.complete = true;
-    todo.endDate = new Date()
-    this.todoService.update(todo.id, todo);
+    this.todoService.complete(todo.id);
+    
   }
   toggleDeleteMode() {
     this.isDeleteMode = !this.isDeleteMode;

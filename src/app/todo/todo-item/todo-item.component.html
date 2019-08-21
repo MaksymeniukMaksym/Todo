@@ -9,6 +9,7 @@
           <mat-card-subtitle class="deadLineTime">{{task | timeLeft}}
           </mat-card-subtitle>
           <mat-card-subtitle click-stop-propagation>{{task.createDate | date:'shortDate'}}</mat-card-subtitle>
+          <mat-card-subtitle click-stop-propagation class="effectively">{{task | effectively }}</mat-card-subtitle>
           <mat-card-actions click-stop-propagation>
                <button class="completeButton" [disabled]="task.complete" (click)="toggleComplete(task)"
                     mat-raised-button color="accent">Complete</button>

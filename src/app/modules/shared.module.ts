@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
 import { ClickOutsideModule } from "ng-click-outside";
 
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
@@ -16,6 +17,8 @@ import {
   MatNativeDateModule,
 } from "@angular/material";
 import { DialogComponent } from '../todo/dialog/dialog.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   imports: [
@@ -28,6 +31,9 @@ import { DialogComponent } from '../todo/dialog/dialog.component';
     NgxMaterialTimepickerModule,
     ClickOutsideModule,
     // material
+    MatListModule,
+    MatTabsModule,
+    MatDividerModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
@@ -50,6 +56,9 @@ import { DialogComponent } from '../todo/dialog/dialog.component';
     NgxMaterialTimepickerModule,
     ClickOutsideModule,
     // material
+    MatListModule,
+    MatTabsModule,
+    MatDividerModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
