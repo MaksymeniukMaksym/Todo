@@ -1,25 +1,16 @@
 mat-card {
-  margin: 5px;
-  max-height: 35px;
-  min-width: 350px;
-  max-width: 350px;
+  margin: 5px 0;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
 
-  .completeButton {
-    left: 52%;
-  }
-  .deleteButton {
-    left: 75%;
-  }
-  .confirmButtonYes {
-    left: 58%;
-  }
-  .confirmButtonNo {
-    left: 75%;
-  }
+
   button {
-    position: absolute;
     height: 35px;
+  }
+  mat-card-actions{
+    position: absolute;
+    left: 69%;
   }
   mat-card-footer {
     position: absolute;
@@ -28,7 +19,8 @@ mat-card {
     bottom: 10px;
   }
   mat-card-title {
-    width: 100px;
+    width: 350px;
+    max-height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -38,7 +30,7 @@ mat-card {
   }
   .deadLineTime {
     position: absolute;
-    width: 80px;
+    width: 200px;
     left: 30%;
   }
   .effectively{

@@ -1,0 +1,17 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+mat-card {
+  margin: 5px 0;
+  display: flex;
+}
+
+.listArea {
+  position: relative;
+  overflow: auto;
+  max-height: 780px;
+  min-height: 380px;
+  padding: 0 8px;
+}
+

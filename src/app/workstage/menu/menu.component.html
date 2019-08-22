@@ -1,4 +1,4 @@
 <mat-toolbar>
-    <span>Maks Todo</span>
+    <div (click)="onUserCabinet()" class="title">{{userinfo.firstName}}</div>
     <button mat-stroked-button color="primary" class="loggout" (click)="onLoggout()">loggout</button>
 </mat-toolbar>

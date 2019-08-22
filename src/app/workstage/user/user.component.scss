@@ -1,0 +1,22 @@
+:host{
+      align-items: center; 
+}
+  mat-card {
+    justify-content: center;
+    margin: 5px;
+    max-height: 35px;
+    width: 93%;
+    display: flex;
+  }
+
+  .buttons{
+    text-align: -webkit-center;
+  }
+  // .content {
+    
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+
