@@ -11,12 +11,11 @@
 
   .buttons{
     text-align: -webkit-center;
+    .button{
+      margin: 8px 19px 0 0px;
+    }
   }
-  // .content {
-    
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  // }
-
+  
+  .input-position{
+    display: flex;
+  }
