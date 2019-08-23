@@ -1,6 +1,6 @@
 import { ServerResponse } from "./../../models/serverResponse.model";
 import { Injectable } from "@angular/core";
-import { User } from "./User";
+import { User } from "../../models/User";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs";
 
@@ -15,7 +15,7 @@ export class UserService {
     this.getUser();
   }
 
-  getUser() {
+  private getUser() {
     this.http
       .get<ServerResponse<User>>("api/api/users/me")
       .subscribe(({ data }) => {
@@ -23,7 +23,7 @@ export class UserService {
       });
   }
 
-  updateUser(firstName, lastName) {
+  public updateUser(firstName, lastName) {
     this.http
       .put<ServerResponse<User>>(`api/api/users/`, {
         firstName,

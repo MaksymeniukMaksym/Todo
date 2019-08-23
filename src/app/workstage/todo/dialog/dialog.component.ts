@@ -1,8 +1,8 @@
 import { TimeTrackService } from '../time-track.service';
 import { TodoService } from '../todo.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { Todo } from '../todo';
+import { Todo } from '../../../models/todo';
 import { FormControl } from '@angular/forms';
 
 
@@ -11,13 +11,14 @@ import { FormControl } from '@angular/forms';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent  {
   
   serializedDate = new FormControl(Date());
   serializedTime = new FormControl(Date());
+
   constructor(
-    public timeTrackService:TimeTrackService,
-    private todoService:TodoService,
+    public timeTrackService: TimeTrackService,
+    private todoService: TodoService,
     @Inject(MAT_DIALOG_DATA) public data: Todo
   ) { }
 
@@ -29,8 +30,4 @@ export class DialogComponent implements OnInit {
     this.todoService.update(this.data.id,this.data)
     this.todoService.dialog.closeAll()   
   }
-
-  ngOnInit() {
-  }
-
 }

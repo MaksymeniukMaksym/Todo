@@ -1,6 +1,6 @@
 import { TodoService } from "../todo.service";
-import { Component, OnInit, SimpleChanges } from "@angular/core";
-import { Todo } from "../todo";
+import { Component, OnInit } from "@angular/core";
+import { Todo } from "../../../models/todo";
 
 @Component({
   selector: "app-todo-list",
@@ -8,22 +8,14 @@ import { Todo } from "../todo";
   styleUrls: ["./todo-list.component.scss"]
 })
 export class TodoListComponent implements OnInit {
-  tasks: Todo[] = [];
+  public tasks: Todo[] = [];
 
-  constructor(private todoService: TodoService) {}
-
-  benefit : string;
+  constructor(public todoService: TodoService) {}
 
 
   ngOnInit() {
-
-    this.todoService.benefitSource.subscribe((value: string) => {
-      this.benefit = value;
-    })
-
     this.todoService.source.subscribe((value: Todo[]) => {
       this.tasks = value;
-      // this.onBenefit();
     });
   }
 }

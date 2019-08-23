@@ -1,4 +1,4 @@
 <div class="listArea">
     <app-todo-item *ngFor="let task of tasks" [task]="task"></app-todo-item>
-    <mat-card>{{benefit}}</mat-card>
+    <mat-card>{{todoService.benefitSource | async}}</mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { TodoService } from "../todo.service";
 
 @Component({
@@ -6,10 +6,11 @@ import { TodoService } from "../todo.service";
   templateUrl: "./input-todo.component.html",
   styleUrls: ["./input-todo.component.scss"]
 })
-export class InputTodoComponent implements OnInit {
-  isInputValid = false;
+export class InputTodoComponent  {
+  
+  public isInputValid = false;
 
-  description = "";
+  private description = "";
 
   constructor(private todoService: TodoService) {}
 
@@ -31,5 +32,5 @@ export class InputTodoComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+
 }

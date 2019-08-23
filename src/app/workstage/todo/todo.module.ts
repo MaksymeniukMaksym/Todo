@@ -1,38 +1,34 @@
+//Angular
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
+//Module
 import { SharedModule } from '../../modules/shared.module';
 import { CommonModule } from "@angular/common";
-
+//Component
 import { TodoComponent } from "./todo.component";
 import { InputTodoComponent } from "./input-todo/input-todo.component";
 import { TodoListComponent } from "./todo-list/todo-list.component";
 import {
   TodoItemComponent,
-  ClickStopPropagation
 } from "./todo-item/todo-item.component";
+//Pipe
 import { TimeLeftPipe } from "./time-left.pipe";
 import { EffectivelyPipe } from '../todo/effectively.pipe';
-// import { MenuComponent } from '../menu/menu.component';
-// import { UserComponent } from './user/user.component';
-
-
+import { ClickStopPropagationDirective } from './todo-item/click-stop-propagation.directive';
 
 const routes: Routes = [
-  { path: '', component: TodoComponent },
-    
+  { path: '', component: TodoComponent },    
 ];
 
 @NgModule({
   declarations: [
-    // UserComponent,
-    // MenuComponent,
     TodoComponent,
     InputTodoComponent,
     TodoListComponent,
     TodoItemComponent,
-    ClickStopPropagation,
     TimeLeftPipe,
     EffectivelyPipe,
+    ClickStopPropagationDirective,
   ],
   imports: [
     CommonModule,
@@ -40,8 +36,6 @@ const routes: Routes = [
     SharedModule,
   ],
   exports: [
-    // UserComponent,
-    // MenuComponent,
     TodoComponent,
     SharedModule,
   ]

@@ -1,14 +1,21 @@
-import { AuthGuardService } from './guards/auth-guard.service';
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from "./guards/auth-guard.service";
+import { UserGuard } from "./guards/user-guard.service";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "", loadChildren: () => import('./workstage/workstage.module').then(m => m.WorkstageModule),canActivate:[AuthGuardService] },
-  ];
+  {
+    path: "",
+    loadChildren: () =>
+      import("./workstage/workstage.module").then(m => m.WorkstageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "auth",
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule),
+    canActivate: [UserGuard]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

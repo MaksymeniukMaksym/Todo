@@ -9,14 +9,10 @@ export class TimeTrackService {
 
 
 
-  convertHours(date){
+  public convertHours(date){
    const arr = date.split(/:/);
    const value = (arr[0]*3600000) + (arr[1]* 60000);
     return(value);    
-  }
-
-  dateNow(){
-    return moment.now()
   }
 
 }

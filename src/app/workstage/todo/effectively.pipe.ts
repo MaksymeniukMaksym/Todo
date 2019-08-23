@@ -1,4 +1,4 @@
-import { Todo } from "./todo";
+import { Todo } from "../../models/todo";
 import { Pipe, PipeTransform } from "@angular/core";
 import * as moment from 'moment';
 
@@ -12,9 +12,10 @@ export class EffectivelyPipe implements PipeTransform {
     const endDate = moment(todo.endDate);
     if(!todo.complete){
     }else if(!!todo.deadLine && !!todo.endDate){
+      const timeBenefit = moment.duration(+deadline - +endDate).humanize();
       if(+deadline - +endDate > 0){
-        return `${moment.duration(+deadline - +endDate).humanize()} save`
-      }else  return `${moment.duration(+deadline - +endDate).humanize()} waste`
+        return `${timeBenefit} save`
+      }else  return `${timeBenefit} waste`
     } 
     
    

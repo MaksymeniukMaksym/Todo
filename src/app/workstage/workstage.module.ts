@@ -1,9 +1,12 @@
-import { WorkstageComponent } from "./workstage.component";
+//Angular
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule, Routes } from "@angular/router";
-import { MenuComponent } from "./menu/menu.component";
+//Module
 import { SharedModule } from "../modules/shared.module";
+//Component
+import { WorkstageComponent } from "./workstage.component";
+import { MenuComponent } from "./menu/menu.component";
 
 const routes: Routes = [
   {

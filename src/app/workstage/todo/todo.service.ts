@@ -1,11 +1,12 @@
 import { DialogComponent } from "./dialog/dialog.component";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { Todo } from "./todo";
+import { Todo } from "../../models/todo";
 import { MatDialog } from "@angular/material";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs/operators";
 import * as moment from "moment";
+import { TodoServer } from 'src/app/models/todoServer.model';
 
 @Injectable({
   providedIn: "root"
@@ -25,16 +26,16 @@ export class TodoService {
   constructor(public dialog: MatDialog, private http: HttpClient) {
     this._source.next(this.getTodos());
   }
-  clear() {
+  public clear() {
     this._source.next([]);
   }
 
-  create(value: string) {
+  public create(value: string) {
     this.http
-      .post<any>("api/api/todos", {
+      .post<TodoServer<Todo>>("api/api/todos", {
         description: value
       })
-      .subscribe(({ data }) => {
+      .subscribe(( data ) => {
         const todo = this.mapTodo(data);
         const todos = this._source.getValue();
         todos.push(todo);
@@ -42,7 +43,7 @@ export class TodoService {
       });
   }
 
-  update(id, todo) {
+  public update(id, todo) {
     this.http
       .put(`api/api/todos/${id}`, {
         description: todo.title,
@@ -57,10 +58,10 @@ export class TodoService {
       });
   }
 
-  complete(id) {
+  public complete(id) {
     this.http
       .put(`api/api/todos/${id}/complete`, {})
-      .subscribe(({ data }: any) => {
+      .subscribe(( data : Todo) => {
         const todo = this.mapTodo(data);
         const todos = this._source.getValue();
         const index = todos.findIndex(todo => todo.id === id);
@@ -69,9 +70,8 @@ export class TodoService {
       });
   }
 
-  userEffectively(): string {
+  public userEffectively(): string {
     const todos = this._source.getValue();
-
     const benefit = todos.reduce((sum: number, todo: Todo) => {
       const deadline = +moment(todo.deadLine);
       const endDate = +moment(todo.endDate);
@@ -85,17 +85,18 @@ export class TodoService {
       return sum + (deadline - endDate);
     }, 0);
 
+    const timeBenefit = moment.duration(benefit).humanize();
     if (benefit < 0) {
-      return `You have lost ${moment.duration(benefit).humanize()}`;
+      return `You have lost ${timeBenefit}`;
     }
     if (benefit == 0) {
       return `Please complete tasks with deadline`;
     }
 
-    return `You saved ${moment.duration(benefit).humanize()}`;
+    return `You saved ${timeBenefit}`;
   }
 
-  delete({ id }) {
+  public delete({ id }) {
     this.http.delete(`api/api/todos/${id}`).subscribe(() => {
       const todos = this._source.getValue();
       const indexForRemove = todos.findIndex(todo => todo.id == id);
@@ -116,7 +117,7 @@ export class TodoService {
     return [];
   }
 
-  mapTodo(data): Todo {
+  private mapTodo(data): Todo {
     const todo = new Todo();
     todo.id = data.id;
     todo.title = data.description;

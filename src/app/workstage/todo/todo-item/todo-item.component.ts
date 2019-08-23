@@ -1,52 +1,27 @@
-import { TodoListComponent } from './../todo-list/todo-list.component';
-import { TimeTrackService } from '../time-track.service';
+import { TodoListComponent } from "./../todo-list/todo-list.component";
+import { TimeTrackService } from "../time-track.service";
 import { TodoService } from "../todo.service";
 
-import {
-  Component,
-  OnInit,
-  Input,
-  HostListener,
-  Directive
-} from "@angular/core";
-import { Todo } from "../todo";
+import { Component, Input, HostListener, Directive } from "@angular/core";
+import { Todo } from "../../../models/todo";
 
-
-@Directive({
-  selector: "[click-stop-propagation]"
-})
-export class ClickStopPropagation {
-  constructor(
-    public todoItemComponent: TodoItemComponent,
-    ) {}
- 
-  @HostListener("click", ["$event"])
-  public onClick(event: any): void {
-    event.stopPropagation();
-  }
-}
 
 @Component({
   selector: "app-todo-item",
   templateUrl: "./todo-item.component.html",
   styleUrls: ["./todo-item.component.scss"]
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent {
   @Input() task: Todo;
-  ngOnInit() {}
-  public wasInside = false;
-  isDeleteMode = false;
-  description = "";
-  
-  
 
+  private wasInside = false;
+  private isDeleteMode = false;
 
   constructor(
     private todoService: TodoService,
-    public timeTrackService :TimeTrackService,
-    public todoList:TodoListComponent,
+    public timeTrackService: TimeTrackService,
+    public todoList: TodoListComponent
   ) {}
-
 
   @HostListener("click")
   clickInside() {
@@ -65,7 +40,6 @@ export class TodoItemComponent implements OnInit {
   toggleComplete(todo: Todo) {
     todo.complete = true;
     this.todoService.complete(todo.id);
-    
   }
   toggleDeleteMode() {
     this.isDeleteMode = !this.isDeleteMode;
@@ -75,7 +49,6 @@ export class TodoItemComponent implements OnInit {
     this.todoService.openDialog(this.task);
   }
 
-  
   DeleteTask(value) {
     this.todoService.delete(value);
   }

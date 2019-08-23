@@ -1,30 +1,27 @@
-import { AuthService } from './../services/auth.service';
-import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../auth.service";
+import { Component } from "@angular/core";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements OnInit {
-
-  constructor( private auth:AuthService,
-                public router:Router) {}
-
-  ngOnInit() {}
-  form = new FormGroup({
+export class LoginComponent {
+  
+  public form = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("")
   });
 
-  onSubmit(){
+  constructor(private auth: AuthService) {}
 
+  onSubmit() {
     const email = this.form.get("email").value;
     const password = this.form.get("password").value;
 
-    this.auth.loginUser(email, password).subscribe() 
+    this.auth.loginUser(email, password).subscribe();
   }
 
   getErrorMessage() {

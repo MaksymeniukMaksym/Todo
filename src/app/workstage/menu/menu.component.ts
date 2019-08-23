@@ -1,7 +1,7 @@
 import { UserService } from './../user/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user/User';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-menu',
@@ -25,6 +25,6 @@ export class MenuComponent implements OnInit {
 
   onLoggout(){
     localStorage.clear();
-    this.router.navigateByUrl("/login");
+    this.router.navigateByUrl("/auth/login");
   }
 }

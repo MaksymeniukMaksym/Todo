@@ -1,7 +1,7 @@
-import { User } from "./User";
+import { User } from "../../models/User";
 import { Component, OnInit, Input } from "@angular/core";
 import { UserService } from "./user.service";
-import { Router } from "@angular/router";
+
 
 @Component({
   selector: "app-user",
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
 export class UserComponent implements OnInit {
   public user = new User();
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.userService.currentUser.subscribe(user => {
@@ -21,9 +21,5 @@ export class UserComponent implements OnInit {
   saveUserInfo(newFirstName, newLastName) {
     console.log("saveUserInfo");
     this.userService.updateUser(newFirstName.value, newLastName.value);
-  }
-
-  redirectTodo() {
-    this.router.navigateByUrl("/todo");
   }
 }

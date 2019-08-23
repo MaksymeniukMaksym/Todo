@@ -2,13 +2,15 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import {tap} from 'rxjs/operators'
+
 @Injectable({
   providedIn: "root"
 })
+
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  registerUser(firstName, lastName, email, password) {
+  public registerUser(firstName, lastName, email, password) {
     localStorage.clear();
     return this.http.post<any>("api/auth/register", {
       firstName: firstName,
@@ -16,11 +18,11 @@ export class AuthService {
       email: email,
       password: password
     }).pipe(tap(() => {
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl("/auth/login");
     }) );
     
   }
-  loginUser(email, password) {
+  public loginUser(email, password) {
     localStorage.clear();
     return this.http.post<any>("api/auth/login", {
       email: email,
@@ -31,11 +33,11 @@ export class AuthService {
     } ) );
   }
 
-  loggedIn() {
+  public loggedIn() {
     return !!localStorage.getItem("token");
   }
 
-  getToken() {
+  public getToken() {
     return localStorage.getItem("token");
   }
 }
