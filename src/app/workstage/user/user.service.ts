@@ -1,22 +1,36 @@
+import { ServerResponse } from "./../../models/serverResponse.model";
 import { Injectable } from "@angular/core";
 import { User } from "./User";
 import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  private _currentUser = new BehaviorSubject<User>(null);
+  public currentUser = this._currentUser.asObservable();
 
-  getUser(user:User) {
-    this.http.get<any>("api/api/users/me")
-    .subscribe(({ data }) => {
-      user.email = data.email;
-      user.firstName = data.firstName;
-      user.lastName = data.lastName;
-      user.isAdmin = data.isAdmin;
-      user.id = data.id;
-      return user;
-    });
+  constructor(private http: HttpClient) {
+    this.getUser();
+  }
+
+  getUser() {
+    this.http
+      .get<ServerResponse<User>>("api/api/users/me")
+      .subscribe(({ data }) => {
+        this._currentUser.next(data);
+      });
+  }
+
+  updateUser(firstName, lastName) {
+    this.http
+      .put<ServerResponse<User>>(`api/api/users/`, {
+        firstName,
+        lastName
+      })
+      .subscribe(({ data }) => {
+        this._currentUser.next(data);
+      });
   }
 }
