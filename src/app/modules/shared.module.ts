@@ -17,6 +17,8 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
 } from "@angular/material";
+import {  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { DialogComponent } from '../workstage/todo/dialog/dialog.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
@@ -34,6 +36,7 @@ import {MatListModule} from '@angular/material/list';
     // material
     MatListModule,
     MatTabsModule,
+    MatFormFieldModule,
     MatDividerModule,
     MatToolbarModule,
     MatInputModule,
@@ -58,6 +61,7 @@ import {MatListModule} from '@angular/material/list';
     ClickOutsideModule,
     // material
     MatListModule,
+    MatFormFieldModule,
     MatTabsModule,
     MatDividerModule,
     MatToolbarModule,
