@@ -9,15 +9,14 @@ import { User } from '../user/User';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public userinfo = new User(); 
-  getUserInfo(){
-    this.userService.getUser(this.userinfo);
-    console.log(this.userinfo)
-  }
+  public userInfo = new User(); 
+
   constructor(private router:Router, private userService:UserService) { }
 
   ngOnInit() {
-    this.getUserInfo();
+      this.userService.currentUser.subscribe(user => {
+        this.userInfo = user;
+      })
   }
 
   onUserCabinet(){
