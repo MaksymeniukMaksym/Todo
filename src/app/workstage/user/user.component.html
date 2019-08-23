@@ -1,14 +1,31 @@
 <div class='content'>
         <mat-card>
-                <h4>Email: </h4> {{user.email}}
+                <div class="input-position">
+                        Email:{{user.email}}
+                </div>
+        
+        </mat-card>
+        
+<form action="">
+        <mat-card>
+                <mat-form-field>
+                        <div class="input-position">
+                                Name:<input matInput #newFirstName [value]='user.firstName'>
+                        </div>
+                </mat-form-field>
         </mat-card>
         <mat-card>
-                <h4>Name: </h4> {{user.firstName}}
+                <mat-form-field >
+                        <div class="input-position" >
+                                Surname:<input #newLastName matInput [value]='user.lastName'>
+                        </div>
+                </mat-form-field>
         </mat-card>
-        <mat-card>
-                <h4>Surname: </h4> {{user.lastName}}
-        </mat-card>
+</form>
         <div class="buttons">
-                <button mat-fab color="primary" (click)="redirectTodo()">Back</button>
+        
+                <button class="button" mat-fab color="warn" (click)="redirectTodo()">Back</button>
+                <button class="button" type="submit" mat-fab color="" (click)="saveUserInfo(newFirstName,newLastName)">Save</button>
+        
         </div>
 </div>
