@@ -17,7 +17,7 @@ export class UserService {
 
   private getUser() {
     this.http
-      .get<ServerResponse<User>>("api/api/users/me")
+      .get<ServerResponse<User>>("api/users/me")
       .subscribe(({ data }) => {
         this._currentUser.next(data);
       });
@@ -25,7 +25,7 @@ export class UserService {
 
   public updateUser(firstName, lastName) {
     this.http
-      .put<ServerResponse<User>>(`api/api/users/`, {
+      .put<ServerResponse<User>>(`api/users/`, {
         firstName,
         lastName
       })

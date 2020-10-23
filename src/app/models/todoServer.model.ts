@@ -1,11 +1,8 @@
-import { Todo } from './todo';
-export class TodoServer<Todo> {
-  map<T>(arg0: (obj: any) => Todo) {
-    throw new Error("Method not implemented.");
-  }
+export class TodoServer {
+
   id: number;
-  description: string;
-  completed: boolean;
+  title: string;
+  complete: boolean;
   dueDate: Date;
   endDate: Date;
   createdat: Date;

@@ -7,7 +7,7 @@ import * as moment from "moment";
 })
 export class TimeLeftPipe implements PipeTransform {
   public curentTime = new Date();
-  transform(todo: Todo): any {
+  transform(todo: Todo): string {
     const deadLine = moment(todo.deadLine);
 
     if (todo.complete !== false) {

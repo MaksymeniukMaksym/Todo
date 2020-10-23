@@ -10,7 +10,7 @@ export class InputTodoComponent  {
   
   public isInputValid = false;
 
-  private description = "";
+  public description = "";
 
   constructor(private todoService: TodoService) {}
 

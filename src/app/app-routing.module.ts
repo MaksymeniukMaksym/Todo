@@ -7,18 +7,18 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./workstage/workstage.module").then(m => m.WorkstageModule),
-    canActivate: [AuthGuard]
+      import("./workstage/workstage.module").then((m) => m.WorkstageModule),
+    // canActivate: [AuthGuard]
   },
   {
     path: "auth",
-    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule),
-    canActivate: [UserGuard]
-  }
+    loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
+    // canActivate: [UserGuard]
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

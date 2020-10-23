@@ -1,10 +1,7 @@
 {
-    "/api": {
-      "target": "https://auth-todo-training.herokuapp.com",
-      "secure": false,
-      "pathRewrite": {
-        "^/api": ""
-      },
-      "changeOrigin": true
-    }
+  "/api": {
+    "target": "https://localhost:44319/",
+    "secure": false,
+    "changeOrigin": true
   }
+}

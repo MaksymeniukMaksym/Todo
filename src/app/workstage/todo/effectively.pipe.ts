@@ -7,7 +7,7 @@ import * as moment from 'moment';
 })
 export class EffectivelyPipe implements PipeTransform {
    
-  transform(todo: Todo): any {
+  transform(todo: Todo): string {
     const deadline = moment(todo.deadLine);
     const endDate = moment(todo.endDate);
     if(!todo.complete){
